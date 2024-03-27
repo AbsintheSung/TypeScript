@@ -1,0 +1,51 @@
+1. 編輯器 : 安裝 vsCode ==> 自己google 就可以找到安裝以及下載方式
+
+2. 執行環境 node.js ==> 自己google 就可以找到安裝以及下載方式
+
+3. 安裝 TypeScript  官網 : https://www.typescriptlang.org/download
+    使用  npm install typescript --save-dev  ==>只會在你有安裝的專案下才能運作 =>用了麻煩 用下面的全域安裝
+
+    使用 npm install typescript -g ==>安裝在整個電腦，可以隨意使用
+
+    安裝完後 ，確認是否安裝成功， 在終端機輸入 tsc -v 
+    輸入 tsc -help 就會有他們各項指令
+
+4.建立一支 index.ts檔案 ，並在 ts檔案輸入 js內容( ts本身就是js，所以是可以直接寫 js內容 )
+    這邊先說明流程: 瀏覽器看不懂ts檔案的內容，所以我們必須透過 TypeScript 編譯器 ，將 .ts檔案轉譯成 js 檔案，好讓瀏覽器可以看懂 js檔案內容
+
+
+    在終端機 輸入 ==> tsc ts檔案名稱
+    之後 系統會編譯 一支 同名的js檔案
+
+    1.我們可以建立一支 html檔案 ，在 透過引入 該js檔使用它
+    2.或是 直接使用 node + js檔名 直接在後端開啟
+
+5.設置 tsconfig.json
+
+    我們不設置 tsconfig.json 的話 ，會使用原先的預設方式，但我們希望每個專案都有自己的 tsconfig.json 可以針對該專案做自己的配置
+    輸入 tsc --init
+    就會產生 for 這支專案的  tsconfig.json
+    而裡面有很多配置，需要再把它打開 
+
+    以下介紹常用的( 或是不錯的 )
+
+    我們在每次要將 TS檔案編譯成JS檔案時候，都會輸入 tsc ts檔案名稱 ，那如果 很多支TS檔案 豈不是要一直不斷輸入 tsc ts檔案名稱 .... 
+
+    ==> rootDir : "編譯路徑" ，我們將 TS檔案都放在某處，之後要編譯的話只要輸入 tsc 就會全部編譯出來
+    ==> outDir :  "編譯後js檔產生的路徑" ，由一開始可以知道 編譯後 它會將 js 產生在跟ts依樣的地方 ，設置此配置 ，可以決定要產生的js要在哪裡，當然也會產生許多js檔案
+    ==> noEmitOnError : 即使 ts編譯錯誤，他仍會產生js，此配置開啟的話，若ts編譯錯誤，則不會編譯出js檔案
+    ==> sourceMap : 我們開啟 html後 ，開啟開發者工具 的主控台 ，假設 index.js內有 console.log('內容') 通常 坐左邊會顯示 檔案名稱(包含檔案類型)  index.js 
+        因為我們是用 ts寫的，然後編譯成 js 讓 html使用，但從 ts 編譯後的 js不見得會是我們看得懂的，所以要 debug 會很麻煩，配置 sourceMap 後
+        它會顯示 index.ts 直接告訴我們這段是在ts檔案的哪邊 ( 但是會多生成 .js.map檔案 )
+
+
+我們在 tsconfig.ts 預設是   "module": "commonjs"， 並開啟 outDir 且設定編譯後的路徑 ，所以輸入 tsc 編譯.ts檔案時，會一次編譯所有ts檔案，所以也會產生多個的js檔案
+若想 只讓多個 ts檔案 最後只會編譯成一隻js檔案的話 關閉outDir 開啟 outFile 並設定路徑以及要將所有 ts檔案 編譯到哪個檔案名稱 ，且將 module 改成 amd
+eq:
+    "module": "amd", 
+     "outFile": "./dist/index.js",   
+
+
+==> 主要參考 :
+ https://willh.gitbook.io/typescript-tutorial
+ https://wangdoc.com/typescript/

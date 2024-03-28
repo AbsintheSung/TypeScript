@@ -1,10 +1,21 @@
 "use strict";
-let Person;
-Person = {
-    "name": "Jack",
-    // "age" : 18,
-    "gender": "male",
-    "country": "ROC",
-};
-console.log(Person);
+let x;
+x = 12;
+x = '123';
+console.log(typeof x);
+// async function getData(){
+//     try {
+//         const res = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+//         if( !res.ok ){
+//             const errorMessgae = await res.json() ;
+//             throw new Error(errorMessgae)
+//         }
+//         const data = await res.json();
+//         console.log(data)
+//     } catch (error) {
+//         console.error('Error:',error)
+//         throw error
+//     }
+// }
+// getData()
 //# sourceMappingURL=app.js.map

@@ -1,0 +1,47 @@
+any型別
+    設置成 any 型別的變數，無形別限制，可以給變數在任何時候賦予任何的型別
+    
+    let x:any;
+    x = 1; // 編譯正常
+    x = 'test'; // 編譯正常
+    x = true; // 編譯正常
+
+    當 TS 無法推斷型別時候，都會直接給予該變數 any型別
+
+使用 any型別須注意的地方:
+==> any型別可能會 汙染 到其他變數
+    
+    let x : any = 'Hello';
+    let y : number = 12;
+
+    y = x 
+    y = y + 12;
+    console.log(y)
+
+    整個過程中，都不會報錯誤，最後執行結果為 : Hello12
+    因為 ts 已經不會檢查 x 的型別
+
+
+unknown 型別 : 可以將 unknown 視為一種嚴格的 any型別，表示 尚未確定的型別 
+
+==>
+    一樣能對變數給予 任意的型別
+
+        let x : unknown
+        x = 12
+        x = '123';
+
+    console.log(typeof x)
+
+    無法作為 變數 賦值給另一個變數
+
+        let x : unknown = 123;
+        let y : number = x; //報錯 ， 會顯示 類型 'unknown' 不可指派給類型 'number'。
+
+    無法直接呼叫屬性跟方法
+
+    let x : unknown = '我是字串'
+    x.toString(); //錯誤
+
+    let y : unknown = { "name":"Jack" }
+    console.log(y.name) //報錯

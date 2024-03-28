@@ -1,16 +1,21 @@
-let Person :{
-    "name":string,
-    "age"? : number,
-    "gender" : string,
-    "country" : string,
-}
 
 
-Person={
-    "name":"Jack",
-    "age" : undefined,
-    "gender" : "male",
-    "country" : "ROC",
-}
+// async function getData(){
+//     try {
+//         const res = await fetch('https://jsonplaceholder.typicode.com/todos/1')
 
-console.log(Person);
+//         if( !res.ok ){
+//             const errorMessgae = await res.json() ;
+//             throw new Error(errorMessgae)
+//         }
+
+//         const data = await res.json();
+//         console.log(data)
+
+//     } catch (error) {
+
+//         console.error('Error:',error)
+//         throw error
+//     }
+// }
+// getData()

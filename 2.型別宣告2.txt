@@ -1,0 +1,38 @@
+型別推論
+    在前面 我們在 TS 宣告變數 都會加上 型別的類型
+    但是 若我們 沒有給 變數 添加 型別的類型，TS會在沒有明確的指定型別的時候推測出一個型別
+
+    let a = '我是文字'; //沒給型別，TS會推測為 字串型別，所以之後的該變數只能賦值字串，其餘會報錯誤
+    a = '哈囉'; //正常編譯
+    a = 123; //編譯錯誤
+
+
+聯合型別（Union Types）
+    表示取值可以為多種型別中的一種。
+
+
+    變數 a 宣告 且 可以接受 字串跟數字型別
+    let a: string | number;
+    a = '我是字串'; //正常編譯
+    a = 123; //正常編譯
+    a = true; //編譯失敗
+
+    let b: string | number | undefined;
+    b = undefined;
+    b = "123"
+    b =true
+
+    當 TypeScript 不確定一個聯合型別的變數到底是哪個型別的時候，我們只能存取此聯合型別的所有型別裡共有的屬性或方法：
+        
+        // .length為字串才有的屬性，所以會編譯錯誤
+        function getLength(something: string | number): number {
+            return something.length;
+        }
+
+        
+        //編譯正常
+        function getString(something: string | number): string {
+            return something.toString();
+        }
+
+       

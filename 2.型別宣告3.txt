@@ -1,0 +1,70 @@
+陣列
+    若是陣列，需再型別後方再添加 [] ，表示傳入陣列的值 ，只能是你所綁定的型別
+
+        ==> let 陣列變數名稱 : 型別[] = []
+
+            let tyArr : number[] = []
+            tyArr.push(1)
+            tyArr.push(2)
+            tyArr.push(3)
+
+            tyArr.push('我是字串') //無法push進陣列，因為非數字型別
+
+            console.log(tyArr)
+
+    陣列內部的值，可能不會只有一種型別，它可會是 數字 跟 字串的集合
+
+        ==>利用 聯合型別方式
+
+            let tyArr : (number | string) [] = [] 
+            tyArr.push(1);
+            tyArr.push(2);
+            tyArr.push(3);
+            tyArr.push('我是字串');
+
+            console.log(tyArr)
+    
+    利用 型別推論 方式
+        宣告時候，若有值在陣列李，TS會推論裡面的值的型態就是該陣列可以存在的型態
+        let tyArr = [1,2,'3'];
+        tyArr.push(1);
+        tyArr.push(2);
+        tyArr.push(3);
+        tyArr.push('我是字串');
+         tyArr.push(true); //報錯誤
+
+        console.log(tyArr)
+
+
+    使用 <泛型>
+        let tyArr : Array<number|string> = []
+        tyArr.push(1);
+        tyArr.push(2);
+        tyArr.push(3);
+        tyArr.push('我是字串');
+        
+        console.log(tyArr);
+
+
+元祖(tuple)
+    規範 陣列裡的成員，每一個須明確規範其型別，且宣告時，每一個的型別須寫在陣列裡面
+    ==> let 變數名稱 : [string, string, boolean] 
+
+    let test : [string, string, boolean] ; //表示 只能有3個元素，第一個和第二個要是 字串，第三個要是布林值
+    test = ['a','b',true]; //編譯正常
+    test = [ 'a','b',true ,'c' ] //編譯失敗，超過長度限制
+    test = [ 12,'b',true ] //編譯失敗，第一個應為字串
+
+    
+    使用 擴展運算符 可以讓 元祖不受長度限制
+    ==> let 變數名稱 = ['string',boolean,...number[]]
+
+    let t1 : [string,boolean,...number[]]
+    t1 = ["123", true ,1,2,3,4,5,6] //編譯正常
+
+    let t2 : [string , ...number[] , boolean]
+    t2 = ["123" , 1,2,3,4,5,6 , true]  //編譯正常
+    
+    console.log(t2)
+
+

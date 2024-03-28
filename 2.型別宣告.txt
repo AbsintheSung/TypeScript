@@ -1,3 +1,61 @@
-0.  
+在 Ts中 我們會 在宣告時候 在變數名稱後方 透過 :型別 來對該變數進行型別上的綁定
+    ==>let 變數名稱 : 型別 = 值
 
-1.
+布林值 ( boolean )
+    let isDone : boolean = false;
+
+    //透過 new Boolean() 建立的物件不是值，他返回一個Boolean的物件，所以不能指派 boolean型別
+    // 要指派給 Boolean物件 ，並給予 布林值 0為false 1為true
+    let createdByNewBoolean : Boolean = new Boolean(1); 
+
+    //也可以 直接呼叫 Boolean() ，仍要傳值進去
+    let createdByBoolean : boolean = Boolean(1);
+
+    console.log(isDone) // 輸出 false
+    console.log(createdByNewBoolean) //輸出 Boolean {true}
+    console.log(createdByBoolean) // 輸出 true
+
+字串 ( string )
+    const myName : string = "Sung";
+    const text : string = `My name is ${myName}.I am currently learning TypeScript.`
+
+    console.log(text)
+
+數值 ( number )
+    const x : number = 123;
+    const y : number = 3.14;
+    const z : number = 0xffff; //16進位,8進位 2進位...表示法也是 number型別
+    const notANumber : number = NaN; 
+    const infinityNumber : number = Infinity; // 全域 Infinity 屬性是一個表示無窮大的數值，為number型別
+
+    console.log(x)
+    console.log(y)
+    console.log(z)
+    console.log(notANumber)
+    console.log(infinityNumber)
+
+undefined , Null
+    let u: undefined = undefined; //為 undefined 型別
+    let n: null = null; // 為 null 型別
+
+當我們沒有設定型別，並指派給變數 undefined 或 null 時，該變數型別為 any ( 可以將滑鼠移動到 變數上，會顯示)
+
+    文件上 寫說 將 strictNullChecks 關閉
+    let a = undefined;   // any
+    const b = undefined; // any
+    let c = null;        // any
+    const d = null;      // any
+
+    strictNullChecks 開啟後
+
+    let a = undefined;   // undefined
+    const b = undefined; // undefined
+    let c = null;        // null
+    const d = null;      // null
+
+
+    但我開啟後 仍是any  ，待測試
+
+
+
+

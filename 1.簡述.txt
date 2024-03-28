@@ -1,0 +1,45 @@
+Ts(靜態類型) 增強了 Js(動態類型) 的型別(type)問題
+
+在Js中，我們可以這樣撰寫一段 具有返回數值的function
+
+    function addNum(num){
+        return num + 1;
+    } 
+
+    console.log( addNum(2) ) //返回 3( 型別為:Number )
+
+若不小心將參數以字串傳入的話呢
+
+    console.log( addNum("2") ) //返回 "21" ( 型別為:string )
+
+
+我們將function 的回傳內容改成 -(減法) 或 *(乘法) 或 /(除法) 呢?
+
+    function addNum(num){
+        return num * 2;
+    }
+
+    console.log( addNum(2) ) //返回 4 ( 型別為:Number )
+    console.log( addNum("2") ) //返回 4 ( 型別為:Number )
+
+上述為隱式類型轉換 是js的特徵之一， Js是屬於動態型別。
+我們宣告一個變數，並賦值給這個變數，假設賦值給該變數的型別為 Number
+之後 在賦值給該變數 其他型別，是不會報錯誤的
+
+    let a = 12;
+    a = "哈囉";
+
+若為物件 ，我們也可以 方便的直接 增加或刪除屬性
+    let y = { foo: 1 };
+    delete y.foo;
+    y.bar = 2;
+
+方便，但也造形了些許的不嚴謹
+
+回到最上方的 function
+     function addNum(num){
+        return num + 1;
+    } 
+
+若今天 中間過程 經過許多的程式計算，最後沒注意，將處理過的值傳入到 addNum()
+而傳入的沒注意到它是字串，經過計算回傳後，得出來的值，就有可能不會是你所想要的值。

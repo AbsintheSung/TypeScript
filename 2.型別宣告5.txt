@@ -45,3 +45,41 @@ unknown 型別 : 可以將 unknown 視為一種嚴格的 any型別，表示 尚�
 
     let y : unknown = { "name":"Jack" }
     console.log(y.name) //報錯
+
+    使用上情境
+        假設 我有一函數 會根據 某值得 true 或 false 回傳不同的值，但我不確定 回傳的值 的型態是 是啥
+        所以 當該回傳的值 去 賦值 給變數的時候 ，我先給予該變數 unknown 型別
+        再透過判斷式 去 針對不同的型別 去做相對應的處理
+
+        const statusType : boolean = false
+        
+        function fn1(){
+            let x : unknown;
+            if(statusType){
+                x = '我是字串，但我型別是 unknown'
+            }else{
+                x = 45678
+            }
+            return x
+        }
+        const y : unknown =  fn1()
+        if( typeof y === 'string' ){
+            console.log(y.length)
+        }
+
+
+
+never 類型
+    不存在的，將它想像成 不可能發生的
+
+    假設 我們有一個function 傳入的參數 為 字串或數字型別，當為數字型別做某些事，當為 字串型別 做某些事，兩者皆不是的情況下 則為 never型別
+    ( 基本上 非字串 或 非數字 參數也傳不進來，所以 else 艮本進不去，只是為了讓 if判斷式比較完整 )
+    function fn(x:string|number) {
+        if (typeof x === 'string') {
+            // ...
+        } else if (typeof x === 'number') {
+            // ...
+        } else {
+            x; // never 型別
+        }
+    }

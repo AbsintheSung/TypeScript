@@ -1,0 +1,31 @@
+型別別名(type) : 型別別名用來給一個型別起個新名字。
+
+在聯合型別聲明
+    let x : number | string | boolean = 12
+    ley y : number | string | boolean | undefined = "嗨"
+
+在物件宣告
+    let Person :{
+        "name":string,
+        "age" : number,
+        "gender" : string,
+        "country" : string,
+    }
+
+會發現 聲明 型別 若很多的話，會過長 。甚至有些重複的也得再打一次
+
+利用 type 的方式
+==> type 自定義名稱 = 型別設定
+
+type numType =  number | string | boolean
+type objType = { "name" : string , "age" : number , "gender" : string , "country" : string}
+
+let x : numType = 12
+let y : numType | undefined = '嗨'
+
+let obj :objType = {
+        "name":"Jack",
+        "age" : 18,
+        "gender" : "male",
+        "country" : "ROC",
+    }

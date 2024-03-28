@@ -1,0 +1,82 @@
+型別斷言
+    型別斷言是 TypeScript 中的一個語法特性，它允許我們指定更準確的型別，提供 TypeScript 編譯器無法自行推斷的額外型別資訊。
+    ==> 值 as 型別
+
+    情境一
+        當我們獲取DOM元素的時候，TypeScript 只知道是 HTML的元素(HTMLElement)，若我們很確定它是什麼類型的話
+        可以透過斷言方式 給予它正確的型別
+
+        html檔
+        <input type="text" class="myElement">
+
+        ts檔
+        const element = document.querySelector(".myElement") as HTMLInputElement; //為HTMLInputElement 是 HTML DOM 中的一個介面，表示html文檔中的 input元素
+        element.value = "Hello, TypeScript!";
+
+    情境二
+        處理任意值 any 型別 ( 此方式不建議，失去Ts判斷型別 )
+
+        let x : any = '我是字串，但是我型別是any類型'
+
+        let y : number = x.length //不會報錯誤，因為 x 是 any屬性 ，TS不會判斷它
+
+        let z :number = (x as string).length //透過斷言 ，告訴ts，我說它是字串，ts就會認定它是字串，正常編譯
+
+        但是 當我 x 的內容改成數字的 8，仍然可以正常編譯 ，但是 console.log(z)出來的結果 會是 undefined，因為 數字沒有 length屬性
+
+    情境三 處理不同 API 返回的數據
+
+        假設 我們獲取遠端某處的資訊
+        
+        async function getData(){
+            try {
+                const res = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+
+                if( !res.ok ){
+                    const errorMessgae = await res.json() ;
+                    throw new Error(errorMessgae)
+                }
+
+                const data = await res.json();
+                console.log(data)
+
+            } catch (error) {
+
+                console.error('Error:',error)
+                throw error
+            }
+        }
+        getData()
+
+        此時 滑鼠移動到 const data = await res.json(); 的 data上 會顯示它為 any 型別 ( 因為 TS 不知道你傳來的資料是啥 )
+        但 實際上 我們資料是後端給的，可以去詢問後端的開發人員所傳遞的資料是啥，所以我們可以再透過 斷言 來將 傳來的資料給予正確的型別
+        ( 
+            事實上，斷言 型別設置不對，也依樣會正常編譯，只是之後要更改時候就會顯示錯誤，因為你已經綁定了 相應的型別了，只能給予一樣的型別
+            eq : 
+                const data = await res.json() as { userId : number , id : number , title : 'string' , completed : boolean  }
+                data.userId = 12 //正常編譯
+                data.userId = '123456' //編譯錯誤，因為只能是數字型別
+        )
+
+        async function getData(){
+            try {
+                const res = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+
+                if( !res.ok ){
+                    const errorMessgae = await res.json() ;
+                    throw new Error(errorMessgae)
+                }
+
+                const data = await res.json() as { userId : number , id : number , title : 'string' , completed : boolean  }
+                console.log(data)
+
+            } catch (error) {
+
+                console.error('Error:',error)
+                throw error
+            }
+        }
+        getData()
+
+
+        

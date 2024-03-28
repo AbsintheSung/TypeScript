@@ -1,21 +1,12 @@
+type numType =  number | string | boolean
+type objType = { "name" : string , "age" : number , "gender" : string , "country" : string}
 
+let x : numType = 12
+let y : numType | undefined = '嗨'
 
-// async function getData(){
-//     try {
-//         const res = await fetch('https://jsonplaceholder.typicode.com/todos/1')
-
-//         if( !res.ok ){
-//             const errorMessgae = await res.json() ;
-//             throw new Error(errorMessgae)
-//         }
-
-//         const data = await res.json();
-//         console.log(data)
-
-//     } catch (error) {
-
-//         console.error('Error:',error)
-//         throw error
-//     }
-// }
-// getData()
+let obj :objType = {
+    "name":"Jack",
+    "age" : 18,
+    "gender" : "male",
+    "country" : "ROC",
+}
